@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { Route, Routes } from 'react-router-dom'
+import { makeStyles } from '@mui/styles'
+import Home from './WebRoutes/Home'
+import Character from './WebRoutes/Character'
+import NotFoundPage from './WebRoutes/NotFoundPage'
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    minHeight: '100vh',
+    background: theme.palette.background.page,
+  },
+}))
 
 function App() {
+  const classes = useStyles()
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={classes.root}>
+      <Routes>
+        <Route exact path="/" element={<Home />} />
+        <Route path="/character/:id" element={<Character />} />
+        <Route element={<NotFoundPage />} />
+      </Routes>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
